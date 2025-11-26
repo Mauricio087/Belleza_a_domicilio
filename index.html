@@ -499,6 +499,17 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="assets/script.js"></script>
-    <script src="cursorEffect.js"></script>
+    <!-- Cursor effect - solo cargar en desktop -->
+    <script>
+        // Solo cargar el cursor effect en dispositivos no táctiles y pantallas grandes
+        if (!window.matchMedia || !window.matchMedia('(pointer: coarse)').matches && window.innerWidth > 768) {
+            var cursorScript = document.createElement('script');
+            cursorScript.src = 'cursorEffect.js';
+            cursorScript.onload = function() {
+                console.log('Cursor effect cargado para desktop');
+            };
+            document.head.appendChild(cursorScript);
+        }
+    </script>
 </body>
 </html>

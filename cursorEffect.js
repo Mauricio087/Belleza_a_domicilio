@@ -23,7 +23,7 @@
             background: radial-gradient(circle, #FFD700 0%, #FFA500 100%);
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 25px rgba(255, 215, 0, 0.6);
             pointer-events: none;
-            z-index: 9999;
+            z-index: 998; /* Reducir z-index para no interferir con navbar (1000) */
             transform: translate(-50%, -50%);
             transition: transform 0.1s ease, opacity 0.3s ease;
             opacity: 0;
@@ -55,7 +55,7 @@
             background: radial-gradient(circle, rgba(255, 215, 0, ${opacity}) 0%, rgba(255, 165, 0, ${opacity * 0.7}) 50%, transparent 70%);
             box-shadow: 0 0 10px rgba(255, 215, 0, ${opacity * 0.8});
             pointer-events: none;
-            z-index: 9998;
+            z-index: 997; /* Reducir z-index para no interferir con navbar (1000) */
             animation: trailFade 0.8s ease-out forwards;
         `;
         
@@ -138,10 +138,16 @@
         style.textContent = `
             .main-cursor {
                 display: block !important;
+                position: fixed !important;
+                z-index: 998 !important; /* Debajo del navbar (1000) */
+                pointer-events: none !important;
             }
             
             .cursor-trail {
                 display: block !important;
+                position: fixed !important;
+                z-index: 997 !important; /* Debajo del navbar (1000) */
+                pointer-events: none !important;
             }
             
             @keyframes trailFade {
@@ -155,21 +161,25 @@
                 }
             }
             
-            /* Asegurar que el cursor personalizado esté visible */
-            * {
-                cursor: none !important;
+            /* Aplicar cursor personalizado solo a elementos específicos, no globalmente */
+            body {
+                cursor: none;
             }
             
-            /* Excepto para elementos interactivos */
-            a, button, input, textarea, select, [role="button"] {
+            /* Excepto para elementos interactivos y el navbar */
+            a, button, input, textarea, select, [role="button"], .navbar, .nav-container, .nav-toggle {
                 cursor: pointer !important;
             }
             
-            /* Ocultar cursor personalizado en dispositivos táctiles */
-            @media (pointer: coarse) {
+            /* Ocultar cursor personalizado en dispositivos táctiles y móviles */
+            @media (pointer: coarse), (max-width: 768px) {
                 .main-cursor,
                 .cursor-trail {
                     display: none !important;
+                }
+                
+                body {
+                    cursor: auto !important;
                 }
                 
                 * {
@@ -211,21 +221,43 @@
     }
     
     // Inicializar cuando el DOM esté listo
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initCursorEffect);
-    } else {
-        // DOM ya está listo
-        initCursorEffect();
+    function tryInit() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initCursorEffect);
+        } else {
+            // DOM ya está listo
+            initCursorEffect();
+        }
     }
+    
+    // Intentar inicialización inmediata y con retraso
+    tryInit();
     
     // Re-inicializar si es necesario (para SPA o cambios dinámicos)
     window.addEventListener('load', () => {
         if (!isInitialized) {
-            setTimeout(initCursorEffect, 100);
+            console.log('Re-intentando inicialización con window.load...');
+            setTimeout(initCursorEffect, 500);
         }
     });
     
+    // Fallback adicional
+    setTimeout(() => {
+        if (!isInitialized) {
+            console.log('Fallback: intentando inicialización forzada...');
+            initCursorEffect();
+        }
+    }, 2000);
+    
     // Exportar para uso externo
     window.initCursorEffect = initCursorEffect;
+    
+    // Inicialización más conservadora - solo si es realmente necesario
+    console.log('CursorEffect.js cargado - esperando condiciones óptimas...');
+    
+    // Intentar inicialización solo en desktop y con delay prudente
+    if (!window.matchMedia || !window.matchMedia('(pointer: coarse)').matches) {
+        setTimeout(() => initCursorEffect(), 1500); // Solo un intento, con delay mayor
+    }
     
 })();
