@@ -200,6 +200,10 @@ img {
     z-index: 1000;
     transition: var(--transition-fast);
     border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: var(--transition-fast);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 .navbar.scrolled {
@@ -275,8 +279,7 @@ img {
 }
 
 .nav-cta {
-    display: flex;
-    align-items: center;
+    display: none; /* Ocultar botón Reservar completamente del navbar */
 }
 
 .cta-button-nav {
@@ -1169,6 +1172,42 @@ img {
     margin: 0;
 }
 
+/* ===== FLOATING WHATSAPP BUTTON ===== */
+.floating-whatsapp {
+    position: fixed;
+    bottom: 100px; /* Posicionado arriba del botón back-to-top */
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: var(--transition-fast);
+    z-index: 999;
+    text-decoration: none;
+}
+
+.floating-whatsapp:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+}
+
+.floating-whatsapp:active {
+    transform: translateY(-1px) scale(1.05);
+}
+
+/* Hide floating button on desktop, show only on mobile */
+@media (min-width: 769px) {
+    .floating-whatsapp {
+        display: none;
+    }
+}
+
 /* ===== BACK TO TOP BUTTON ===== */
 .back-to-top {
     position: fixed;
@@ -1190,6 +1229,13 @@ img {
     opacity: 0;
     visibility: hidden;
     z-index: 999;
+}
+
+/* Ajustar posición del botón back-to-top en móvil */
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 30px; /* Mantener en la parte inferior */
+    }
 }
 
 .back-to-top.show {
@@ -1247,6 +1293,10 @@ img {
 @media (max-width: 768px) {
     .nav-container {
         padding: var(--spacing-sm) var(--spacing-md); /* Ajustar padding para logo más grande */
+    }
+    
+    .nav-cta {
+        display: none; /* Ocultar botón Reservar completamente del navbar */
     }
     
     .nav-menu {
@@ -1318,6 +1368,31 @@ img {
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
+    }
+    
+    .footer-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .footer-logo {
+        justify-content: center;
+    }
+    
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .footer-contact p {
+        justify-content: center;
+    }
+    
+    .social-links {
+        justify-content: center;
     }
 }
 

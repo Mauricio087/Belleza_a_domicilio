@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Cursor Effect</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .test-button {
+            padding: 1rem 2rem;
+            background: #D4AF37;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .test-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .test-text {
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        
+        .status {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            z-index: 10000;
+        }
+    </style>
+</head>
+<body>
+    <div class="status" id="status">Verificando efecto de cursor...</div>
+    
+    <div class="test-text">
+        Mueve el mouse por la pantalla para ver el efecto del cursor dorado
+    </div>
+    
+    <button class="test-button" onclick="testClick()">Haz clic aquí</button>
+    
+    <div class="test-text">
+        El cursor debería mostrar un efecto dorado con partículas siguiendo el movimiento
+    </div>
+
+    <script src="cursorEffect.js"></script>
+    <script>
+        // Verificar el estado del efecto
+        function checkCursorStatus() {
+            const status = document.getElementById('status');
+            
+            // Verificar si el cursor fue creado
+            setTimeout(() => {
+                const cursor = document.querySelector('.main-cursor');
+                const styles = document.getElementById('cursor-styles');
+                
+                if (cursor && styles) {
+                    status.innerHTML = '✅ Efecto de cursor inicializado<br>✅ Estilos aplicados<br>✅ Cursor creado';
+                    status.style.background = 'rgba(0,128,0,0.8)';
+                } else {
+                    status.innerHTML = '❌ Efecto de cursor no detectado<br>❌ Verifica la consola para errores';
+                    status.style.background = 'rgba(128,0,0,0.8)';
+                }
+            }, 1000);
+        }
+        
+        // Función de prueba para el clic
+        function testClick() {
+            console.log('Botón clickeado - deberías ver partículas adicionales');
+        }
+        
+        // Verificar si hay errores en la consola
+        window.addEventListener('error', function(e) {
+            console.error('Error detectado:', e.message);
+            const status = document.getElementById('status');
+            status.innerHTML += '<br>❌ Error: ' + e.message;
+            status.style.background = 'rgba(128,0,0,0.8)';
+        });
+        
+        // Iniciar verificación
+        checkCursorStatus();
+        
+        // Log adicional para debugging
+        console.log('=== INFORMACIÓN DE DEBUGGING ===');
+        console.log('User Agent:', navigator.userAgent);
+        console.log('¿Dispositivo táctil?', window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+        console.log('¿Función initCursorEffect disponible?', typeof window.initCursorEffect === 'function');
+    </script>
+</body>
+</html>
