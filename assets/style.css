@@ -592,17 +592,42 @@ img {
     position: relative;
     height: 200px;
     overflow: hidden;
+    border-radius: 12px;
+    transition: var(--transition-medium);
+    background-color: var(--primary-white);
+    border: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .service-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: var(--primary-white);
+    padding: 10px;
+    box-sizing: border-box;
     transition: var(--transition-medium);
 }
 
+/* Prevenir el efecto hover de escala en imágenes que deben mostrarse completas */
 .service-card:hover .service-image img {
-    transform: scale(1.1);
+    transform: scale(1.05);
+}
+
+/* Efecto hover en el contenedor de imagen */
+.service-card:hover .service-image {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+/* Transición suave para el card completo */
+.service-card {
+    transition: var(--transition-medium);
+}
+
+/* Efecto hover sutil en el card */
+.service-card:hover {
+    transform: translateY(-5px);
 }
 
 .service-overlay {
@@ -674,6 +699,15 @@ img {
 .about {
     padding: var(--spacing-xxl) 0;
     background: var(--primary-white);
+}
+
+/* Centrar el header de la sección about */
+.about .section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .about-content {
@@ -1182,14 +1216,14 @@ img {
     right: 30px;
     width: 60px;
     height: 60px;
-    background: #25D366;
+    background: var(--primary-gold);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--primary-black);
     font-size: 1.8rem;
-    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
     transition: var(--transition-fast);
     z-index: 999;
     text-decoration: none;
@@ -1197,7 +1231,7 @@ img {
 
 .floating-whatsapp:hover {
     transform: translateY(-3px) scale(1.1);
-    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
 }
 
 .floating-whatsapp:active {
@@ -1277,6 +1311,12 @@ img {
         gap: var(--spacing-xl);
     }
     
+    /* Ajustes para móvil - header centrado */
+    .about .section-header {
+        margin-bottom: var(--spacing-xl);
+        padding: 0 var(--spacing-md);
+    }
+    
     .about-image {
         margin-top: 0; /* Eliminar margen en móvil ya que la imagen va arriba */
         text-align: center;
@@ -1284,7 +1324,7 @@ img {
     
     .about-text {
         padding-right: 0; /* Eliminar padding en móvil */
-        text-align: center; /* Centrar texto en móvil */
+        text-align: left; /* Mantener texto alineado a la izquierda en móvil */
     }
     
     .contact-grid {
@@ -1479,6 +1519,16 @@ img {
 
     .services-grid {
         grid-template-columns: 1fr;
+    }
+    
+    /* Ajustes de hover para móviles */
+    .service-card:hover .service-image img {
+        transform: scale(1.03);
+    }
+    
+    .service-card:hover .service-image {
+        transform: scale(1.01);
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
     }
 
     .about-features {
