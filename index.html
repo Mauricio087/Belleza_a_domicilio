@@ -258,19 +258,19 @@
                 <div class="about-text" data-aos="fade-right">
                     <div class="about-description">
                         <p class="about-intro">
-                            Mi nombre es <strong>Patricia Armijo</strong> y cuento con <strong>12 años de experiencia</strong> 
-                            en el rubro de la belleza y cuidado personal. Mi compromiso es ofrecerte una experiencia 
-                            <strong>exclusiva, memorable y plenamente personalizada</strong>, con la comodidad de recibir 
+                            Mi nombre es <strong>Patricia Armijo</strong> y cuento con <strong>12 años de experiencia</strong>
+                            en el rubro de la belleza y cuidado personal. Mi compromiso es ofrecerte una experiencia
+                            <strong>exclusiva, memorable y plenamente personalizada</strong>, con la comodidad de recibir
                             el servicio directamente en tu hogar.
                         </p>
                         <p>
-                            Con más de una década de experiencia en el sector de la belleza, me especializo en brindar 
-                            servicios de alta calidad que realzan la belleza natural de cada cliente, adaptándome a sus 
+                            Con más de una década de experiencia en el sector de la belleza, me especializo en brindar
+                            servicios de alta calidad que realzan la belleza natural de cada cliente, adaptándome a sus
                             necesidades específicas y preferencias personales.
                         </p>
                         <p>
-                            Mi pasión por el arte de la manicura y pedicura me ha llevado a perfeccionar técnicas modernas 
-                            y tradicionales, utilizando productos de primera calidad que garantizan resultados duraderos y 
+                            Mi pasión por el arte de la manicura y pedicura me ha llevado a perfeccionar técnicas modernas
+                            y tradicionales, utilizando productos de primera calidad que garantizan resultados duraderos y
                             seguros para la salud de tus uñas.
                         </p>
                         <div class="about-features">
@@ -393,34 +393,80 @@
                                 <input type="tel" id="phone" name="phone" required>
                             </div>
                             <div class="form-group">
-                                <label for="service">Servicio de interés</label>
-                                <select id="service" name="service" required>
-                                    <option value="">Selecciona un servicio</option>
-                                    <option value="manicure-permanente">Manicure Permanente</option>
-                                    <option value="pedicure-permanente">Pedicure Permanente</option>
-                                    <option value="manos-pies-permanente">Manos y Pies Permanente</option>
-                                    <option value="manicure-rusa">Manicure Rusa</option>
-                                    <option value="lifting-pestanas">Lifting de Pestañas</option>
-                                    <option value="servicio-personalizado">Servicio Personalizado</option>
-                                </select>
+                                <label for="service" class="select-label">
+                                    <i class="fas fa-spa"></i>
+                                    Servicio de interés
+                                </label>
+                                <div class="custom-select">
+                                    <select id="service" name="service" required style="display: none;">
+                                        <option value="">Selecciona un servicio</option>
+                                        <option value="manicure-permanente">Manicure Permanente</option>
+                                        <option value="pedicure-permanente">Pedicure Permanente</option>
+                                        <option value="manos-pies-permanente">Manos y Pies Permanente</option>
+                                        <option value="manicure-rusa">Manicure Rusa</option>
+                                        <option value="lifting-pestanas">Lifting de Pestañas</option>
+                                        <option value="Servicios-Masculinos">Servicios Masculinos</option>
+                                        <option value="servicio-personalizado">Servicio Personalizado</option>
+                                    </select>
+                                    
+                                    <!-- Dropdown personalizado -->
+                                     <div class="custom-dropdown">
+                                         <div class="dropdown-selected">
+                                             <span class="dropdown-text">Selecciona un servicio</span>
+                                         </div>
+                                         <div class="dropdown-options">
+                                             <div class="dropdown-option" data-value="">Selecciona un servicio</div>
+                                             <div class="dropdown-option" data-value="manicure-permanente">Manicure Permanente</div>
+                                             <div class="dropdown-option" data-value="pedicure-permanente">Pedicure Permanente</div>
+                                             <div class="dropdown-option" data-value="manos-pies-permanente">Manos y Pies Permanente</div>
+                                             <div class="dropdown-option" data-value="manicure-rusa">Manicure Rusa</div>
+                                             <div class="dropdown-option" data-value="lifting-pestanas">Lifting de Pestañas</div>
+                                             <div class="dropdown-option" data-value="Servicios-Masculinos">Servicios Masculinos</div>
+                                             <div class="dropdown-option" data-value="servicio-personalizado">Servicio Personalizado</div>
+                                         </div>
+                                     </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="date">Fecha preferida</label>
                                 <input type="date" id="date" name="date" required>
                             </div>
                             <div class="form-group">
-                                <label for="time">Hora preferida</label>
-                                <select id="time" name="time" required>
-                                    <option value="">Selecciona horario</option>
-                                    <option value="10:00">10:00</option>
-                                    <option value="11:00">11:00</option>
-                                    <option value="12:00">12:00</option>
-                                    <option value="13:00">13:00</option>
-                                    <option value="14:00">14:00</option>
-                                    <option value="15:00">15:00</option>
-                                    <option value="16:00">16:00</option>
-                                    <option value="17:00">17:00</option>
-                                </select>
+                                <label for="time" class="select-label">
+                                    <i class="fas fa-clock"></i>
+                                    Hora preferida
+                                </label>
+                                <div class="custom-select">
+                                    <select id="time" name="time" required style="display: none;">
+                                        <option value="">Selecciona horario</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                    </select>
+                                    
+                                    <!-- Dropdown personalizado para horario -->
+                                    <div class="custom-dropdown">
+                                        <div class="dropdown-selected">
+                                            <span class="dropdown-text">Selecciona horario</span>
+                                        </div>
+                                        <div class="dropdown-options">
+                                            <div class="dropdown-option" data-value="">Selecciona horario</div>
+                                            <div class="dropdown-option" data-value="10:00">10:00</div>
+                                            <div class="dropdown-option" data-value="11:00">11:00</div>
+                                            <div class="dropdown-option" data-value="12:00">12:00</div>
+                                            <div class="dropdown-option" data-value="13:00">13:00</div>
+                                            <div class="dropdown-option" data-value="14:00">14:00</div>
+                                            <div class="dropdown-option" data-value="15:00">15:00</div>
+                                            <div class="dropdown-option" data-value="16:00">16:00</div>
+                                            <div class="dropdown-option" data-value="17:00">17:00</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="message">Mensaje adicional (opcional)</label>

@@ -9,6 +9,7 @@
     --primary-gold: #D4AF37;
     --primary-gold-light: #F4D03F;
     --primary-gold-dark: #B8860B;
+    --primary-gold-hover: #E6C158;
     --primary-black: #000000;
     --primary-white: #FFFFFF;
     --secondary-white: #F8F9FA;
@@ -26,11 +27,11 @@
     --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.15);
     --shadow-heavy: 0 15px 40px rgba(0, 0, 0, 0.2);
     --shadow-gold: 0 8px 25px rgba(212, 175, 55, 0.3);
-    
+
     /* Typography */
     --font-primary: 'Playfair Display', serif;
     --font-secondary: 'Poppins', sans-serif;
-    
+
     /* Spacing */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
@@ -38,13 +39,13 @@
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
     --spacing-xxl: 4rem;
-    
+
     /* Border Radius */
     --radius-sm: 8px;
     --radius-md: 15px;
     --radius-lg: 25px;
     --radius-xl: 50%;
-    
+
     /* Transitions */
     --transition-fast: 0.3s ease;
     --transition-medium: 0.5s ease;
@@ -994,6 +995,488 @@ img {
     color: rgba(255, 255, 255, 0.6);
 }
 
+/* ===== ESTILOS MEJORADOS PARA SELECT/DROPDOWN ===== */
+.form-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right var(--spacing-sm) center;
+    background-size: 20px;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+.form-group select::-ms-expand {
+    display: none;
+}
+
+.form-group select option {
+    background: var(--primary-black);
+    color: var(--primary-white);
+    padding: var(--spacing-sm);
+}
+
+.form-group select option:first-child {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.form-group select:hover {
+    border-color: var(--primary-gold);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.form-group select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Clase para selects con error */
+.form-group select.error {
+    border-color: #ff4444;
+    background-color: rgba(255, 68, 68, 0.1);
+}
+
+.form-group select.error:focus {
+    border-color: #ff4444;
+    box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.2);
+}
+
+/* Clase para selects exitosos */
+.form-group select.success {
+    border-color: #44ff44;
+    background-color: rgba(68, 255, 68, 0.1);
+}
+
+.form-group select.success:focus {
+    border-color: #44ff44;
+    box-shadow: 0 0 0 2px rgba(68, 255, 68, 0.2);
+}
+
+/* ===== CLASES ADICIONALES PARA SELECTS PERSONALIZADOS ===== */
+.custom-select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+.custom-select select {
+    width: 100%;
+    padding: 14px 45px 14px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--primary-white);
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.3px;
+}
+
+.custom-select::after {
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 600;
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
+    font-size: 0.9rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-select:hover select {
+    border-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.custom-select:hover::after {
+    color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.custom-select select:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1), 0 4px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+}
+
+.custom-select select:active {
+    border-radius: 12px;
+}
+
+.select-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.4px;
+    text-transform: none;
+}
+
+.select-label i {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-select:hover + .select-label i,
+.select-label:hover i {
+    color: rgba(255, 255, 255, 0.8);
+    transform: none;
+}
+
+/* ===== ANIMACIONES Y ESTADOS PARA SELECTS ===== */
+.custom-select.focused::after {
+    transform: translateY(-50%) rotate(180deg);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.custom-dropdown.active::after {
+    transform: translateY(-50%) rotate(180deg);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ===== DROPDOWN PERSONALIZADO ===== */
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown-selected {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 14px 45px 14px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--primary-white);
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.3px;
+}
+
+.dropdown-selected:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.dropdown-selected.active {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1), 0 4px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 12px 12px 0 0;
+}
+
+.dropdown-text {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-options.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-option {
+    padding: 12px 18px;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.dropdown-option:last-child {
+    border-bottom: none;
+    border-radius: 0 0 12px 12px;
+}
+
+.dropdown-option:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 1);
+}
+
+.dropdown-option.selected {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--primary-white);
+    font-weight: 500;
+}
+
+/* Estilo para el menú desplegable cuando está abierto */
+.custom-select select:focus option:first-child {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.custom-select select:focus option:last-child {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.custom-select.hovered::after {
+    color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-50%) scale(1);
+}
+
+.custom-select select.selected {
+    animation: selectPulse 0.3s ease;
+}
+
+@keyframes selectPulse {
+    0% {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+    100% {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Estilo para opciones seleccionadas */
+.custom-select select option:checked {
+    background: #B8860B;
+    color: var(--primary-white);
+    font-weight: 500;
+}
+
+/* Estilo para las opciones del select */
+.custom-select select option {
+    background: #1a1a1a;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 10px 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    border-radius: 8px;
+}
+
+.custom-select select option:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Estado de error corporativo */
+.custom-select select.error {
+    border-color: #dc3545;
+    background: rgba(220, 53, 69, 0.08);
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.2);
+}
+
+.custom-select select.error:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25);
+}
+
+.custom-select.error::after {
+    color: #dc3545;
+}
+
+/* Estado de éxito corporativo */
+.custom-select select.success {
+    border-color: #28a745;
+    background: rgba(40, 167, 69, 0.08);
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+}
+
+.custom-select select.success:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.25);
+}
+
+.custom-select.success::after {
+    color: #28a745;
+}
+
+/* Estilos adicionales para desktop */
+@media (min-width: 769px) {
+    .custom-select select {
+        padding: 16px 50px 16px 20px;
+        font-size: 1rem;
+        border-radius: 14px;
+        font-weight: 400;
+        letter-spacing: 0.2px;
+    }
+    
+    .custom-select::after {
+        right: 20px;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .select-label {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .custom-select:hover select {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        border-color: rgba(255, 255, 255, 0.25);
+        border-radius: 14px;
+    }
+    
+    .custom-select select:focus {
+        border-radius: 14px;
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), 0 6px 24px rgba(0, 0, 0, 0.2);
+    }
+    
+    .custom-select select:active {
+        border-radius: 14px;
+    }
+}
+
+/* Responsive para selects */
+@media (max-width: 768px) {
+    .custom-select select {
+        padding: 14px 42px 14px 16px;
+        font-size: 1rem;
+        border-radius: 10px;
+        min-height: 48px;
+        font-weight: 400;
+    }
+
+    .custom-select::after {
+        right: 16px;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .select-label {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .custom-select select:focus {
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1), 0 4px 16px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+    }
+    
+    .custom-select select:active {
+        border-radius: 10px;
+    }
+    
+    /* Dropdown personalizado responsive */
+    .dropdown-selected {
+        padding: 14px 42px 14px 16px;
+        font-size: 1rem;
+        border-radius: 10px;
+        min-height: 48px;
+        font-weight: 400;
+    }
+    
+    .dropdown-selected.active {
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .dropdown-options {
+        border-radius: 0 0 10px 10px;
+    }
+    
+    .dropdown-option:last-child {
+        border-radius: 0 0 10px 10px;
+    }
+
+    .custom-select:active select {
+        border-radius: 10px;
+    }
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 480px) {
+    .custom-select select {
+        padding: 16px 44px 16px 18px;
+        font-size: 1rem;
+        min-height: 52px;
+        border-radius: 12px;
+    }
+    
+    .dropdown-selected {
+        padding: 16px 44px 16px 18px;
+        font-size: 1rem;
+        min-height: 52px;
+        border-radius: 12px;
+    }
+    
+    .dropdown-selected.active {
+        border-radius: 12px 12px 0 0;
+    }
+    
+    .dropdown-options {
+        border-radius: 0 0 12px 12px;
+    }
+    
+    .dropdown-option:last-child {
+        border-radius: 0 0 12px 12px;
+    }
+
+    .custom-select::after {
+        font-size: 0.9rem;
+        right: 18px;
+    }
+
+    .select-label {
+        font-size: 0.9rem;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .select-label i {
+        font-size: 0.9rem;
+    }
+}
+
 .form-success {
     display: none;
     text-align: center;
@@ -1268,23 +1751,6 @@ img {
     z-index: 999;
 }
 
-/* Ajustar posición del botón back-to-top en móvil */
-@media (max-width: 768px) {
-    .back-to-top {
-        bottom: 30px; /* Mantener en la parte inferior */
-    }
-}
-
-.back-to-top.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.back-to-top:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-gold);
-}
-
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 1024px) {
     .hero-content {
@@ -1292,108 +1758,107 @@ img {
         text-align: center;
         gap: var(--spacing-xl);
     }
-    
+
     .hero-image {
         margin-top: 0; /* Eliminar margen en móvil para mejor flujo */
         order: -1; /* Colocar imagen arriba en móvil */
     }
-    
+
     .hero-title {
         font-size: 3rem;
     }
-    
+
     .hero-title-sub {
         font-size: 2rem;
     }
-    
+
     .about-content {
         grid-template-columns: 1fr;
         gap: var(--spacing-xl);
     }
-    
+
     /* Ajustes para móvil - header centrado */
     .about .section-header {
         margin-bottom: var(--spacing-xl);
         padding: 0 var(--spacing-md);
     }
-    
+
     .about-image {
         margin-top: 0; /* Eliminar margen en móvil ya que la imagen va arriba */
         text-align: center;
     }
-    
+
     .about-text {
         padding-right: 0; /* Eliminar padding en móvil */
         text-align: left; /* Mantener texto alineado a la izquierda en móvil */
     }
-    
+
     .contact-grid {
         grid-template-columns: 1fr;
         gap: var(--spacing-xl);
     }
 }
 
-/* Prevenir desborde horizontal en móviles */
-@media (max-width: 768px) {
+    /* Prevenir desborde horizontal en móviles */
     /* Reset de anchos y prevenir scroll horizontal */
     html, body {
         max-width: 100vw;
         overflow-x: hidden;
         position: relative;
     }
-    
+
     /* Aplicar word-wrap a todos los elementos de texto */
     * {
         word-wrap: break-word;
         overflow-wrap: break-word;
         hyphens: auto;
     }
-    
+
     /* Ajustar tamaños de fuente para pantallas pequeñas */
     h1, h2, h3, h4, h5, h6, p, span, div {
         max-width: 100%;
         word-wrap: break-word;
         overflow-wrap: break-word;
     }
-    
+
     h1 {
         font-size: 2rem;
     }
-    
+
     h2 {
         font-size: 1.8rem;
     }
-    
+
     h3 {
         font-size: 1.4rem;
     }
-    
+
     /* Asegurar que todos los contenedores principales no causen desborde */
     .container {
         max-width: 100vw;
         padding: 0 var(--spacing-md);
         box-sizing: border-box;
     }
-    
+
     /* Ajustar elementos con posicionamiento absoluto/relativo */
     .hero-decoration {
         right: -10px;
         width: 80px;
         height: 80px;
     }
-    
+
     .about-decoration {
         right: -10px;
         width: 60px;
         height: 60px;
     }
-    
+
     .about-decoration-dots {
         left: -15px;
         width: 40px;
         height: 40px;
     }
-    
+
     /* Ajustar botones flotantes */
     .floating-whatsapp {
         right: 20px;
@@ -1401,13 +1866,13 @@ img {
         height: 50px;
         bottom: 90px;
     }
-    
+
     .back-to-top {
         right: 20px;
         width: 40px;
         height: 40px;
     }
-    
+
     /* Ajustar textos específicos que puedan causar desborde */
     .hero-title, .hero-title-sub, .hero-description,
     .section-title, .service-title, .service-description,
@@ -1417,7 +1882,7 @@ img {
         overflow-wrap: break-word;
         hyphens: auto;
     }
-    
+
     /* Asegurar que los botones y enlaces no causen desborde */
     .cta-button-primary, .cta-button-secondary, .cta-button-nav,
     .nav-link, .service-cta, .about-cta {
@@ -1426,69 +1891,56 @@ img {
         overflow-wrap: break-word;
         white-space: normal;
     }
-}
 
+
+/* ===== MOBILE NAVBAR STYLES (max-width: 768px) ===== */
 @media (max-width: 768px) {
-    .nav-container {
-        padding: 8px var(--spacing-md); /* Alinear con el padding del container (24px) */
-        position: relative;
-        height: 80px; /* Altura fija para consistencia */
-        align-items: center; /* Centrar verticalmente */
-        display: flex; /* Asegurar flexbox */
-        justify-content: space-between; /* Espaciado entre elementos */
-        max-width: 100vw; /* Usar viewport width en lugar de 100% */
-        margin: 0 auto; /* Centrar como el container */
-        box-sizing: border-box; /* Incluir padding en el ancho total */
-        overflow: hidden; /* Ocultar cualquier desborde */
-    }
-    
-    .nav-cta {
-        display: none; /* Ocultar botón Reservar completamente del navbar */
-    }
-    
-    /* Asegurar que el menú hamburguesa esté siempre visible y posicionado correctamente */
+    /* Mostrar el menú hamburguesa en móvil */
     .nav-toggle {
         display: flex !important;
-        position: relative !important;
+        position: relative;
         z-index: 1002;
         background: rgba(255, 215, 0, 0.1);
         border-radius: 5px;
         padding: 8px;
         border: 1px solid rgba(255, 215, 0, 0.3);
         transition: var(--transition-fast);
-        margin-left: 10px; /* Espacio fijo en lugar de auto */
-        flex-shrink: 0; /* Evitar que se encoja */
+        margin-left: auto;
+        flex-shrink: 0;
     }
-    
+
     .nav-toggle:hover {
         background: rgba(255, 215, 0, 0.2);
         border-color: rgba(255, 215, 0, 0.5);
     }
-    
+
+    /* Ocultar el botón de reservar en el navbar en móvil */
+    .nav-cta {
+        display: none;
+    }
+
+    /* Estilos del menú desplegable móvil */
     .nav-menu {
         position: fixed;
         left: 0;
-        top: 80px; /* Ajustar para nuevo alto del navbar */
+        top: 80px; /* Ajustar según la altura del navbar */
         flex-direction: column;
         background-color: var(--primary-black);
-        width: 100vw; /* Usar viewport width */
+        width: 100vw;
         text-align: center;
         transition: var(--transition-fast);
         box-shadow: var(--shadow-medium);
-        padding: var(--spacing-lg) var(--spacing-md); /* Alinear con el padding del container */
+        padding: var(--spacing-lg) var(--spacing-md);
         gap: var(--spacing-lg);
-        transform: translateX(-100%); /* Usar transform en lugar de left para mejor rendimiento */
-        box-sizing: border-box; /* Incluir padding en el ancho */
+        transform: translateX(-100%);
+        box-sizing: border-box;
     }
 
     .nav-menu.active {
-        transform: translateX(0); /* Mostrar menú con transform */
+        transform: translateX(0);
     }
 
-    .nav-toggle {
-        display: flex;
-    }
-
+    /* Estilos para el menú hamburguesa activo */
     .nav-toggle.active .bar:nth-child(2) {
         opacity: 0;
     }
@@ -1501,102 +1953,24 @@ img {
         transform: translateY(-8px) rotate(-45deg);
     }
 
-    .hero-title {
-        font-size: 2.5rem;
-    }
-
-    .hero-title-sub {
-        font-size: 1.8rem;
-    }
-
-    .hero-features {
-        justify-content: center;
-    }
-
-    .hero-cta {
-        justify-content: center;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Centrar todo el contenido de las cards en móvil */
-    .service-content {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
+    /* Ajustar el contenedor del navbar para móvil */
+    .nav-container {
+        padding: 8px var(--spacing-md);
+        height: 80px; /* Altura fija para consistencia */
         align-items: center;
-    }
-    
-    .service-content h3,
-    .service-content p,
-    .service-price,
-    .service-duration {
-        text-align: center;
-    }
-    
-    .service-duration {
-        justify-content: center;
-    }
-    
-    /* Centrar el badge/overlay en móvil */
-    .service-overlay {
-        right: auto;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    
-    /* Ajustes de hover para móviles */
-    .service-card:hover .service-image img {
-        transform: scale(1.03);
-    }
-    
-    .service-card:hover .service-image {
-        transform: scale(1.01);
-        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
-    }
-
-    .about-features {
-        grid-template-columns: 1fr;
-    }
-
-    .about-stats {
-        grid-template-columns: 1fr;
-    }
-
-    .instagram-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    
-    .footer-section {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+        justify-content: space-between;
+        max-width: 100vw;
+        margin: 0 auto;
+        box-sizing: border-box;
+        overflow: hidden;
     }
-    
-    .footer-logo {
-        justify-content: center;
-    }
-    
-    .footer-links {
+
+    /* Asegurar que el logo esté visible y bien posicionado */
+    .nav-logo {
         display: flex;
-        flex-direction: column;
         align-items: center;
-    }
-    
-    .footer-contact p {
-        justify-content: center;
-    }
-    
-    .social-links {
-        justify-content: center;
+        margin: 0;
     }
 }
 
@@ -1604,36 +1978,30 @@ img {
     .container {
         padding: 0 var(--spacing-md);
     }
-    
+
     .nav-container {
         padding: 8px var(--spacing-md); /* Mantener consistencia con el container */
     }
-    
-    .nav-menu {
-        width: 100vw; /* Usar viewport width */
-        transform: translateX(-100%); /* Usar transform en lugar de left */
-    }
-    
-    .nav-menu.active {
-        transform: translateX(0); /* Mostrar menú con transform */
-    }
-    
+
+    /* Los estilos de nav-menu se heredan del media query 768px - no duplicar aquí */
+
     /* Ajustes adicionales para pantallas muy pequeñas */
     .nav-logo {
         width: 100px; /* Reducir aún más el logo */
         height: 56px; /* Mantener proporción 16:9 */
     }
-    
+
     .logo-img {
         width: 100px;
         height: 56px;
     }
-    
+
     .nav-toggle {
+        display: flex !important; /* Asegurar que sea visible */
         padding: 6px; /* Reducir padding del botón */
         margin-left: 5px; /* Reducir margen */
     }
-    
+
     .bar {
         width: 20px; /* Reducir tamaño de las barras */
         height: 2px;
@@ -1687,7 +2055,7 @@ img {
         margin: 0; /* Eliminar márgenes laterales */
         flex-shrink: 0; /* Evitar que se encoja */
     }
-    
+
     .logo-img {
         width: 120px; /* Reducir aún más para mejor espacio en móvil */
         height: 67px; /* Mantener proporción 16:9 aproximadamente */
@@ -1709,14 +2077,81 @@ img {
     }
 }
 
-/* Ajustar hero para pantallas muy pequeñas */
+/* ===== EXTREME MOBILE FIXES (less than 350px) ===== */
 @media (max-width: 350px) {
+    /* Ajustar hero para pantallas muy pequeñas */
     .hero {
         padding-top: 70px; /* Ajustar para navbar más pequeño */
     }
 
     .hero-content {
         min-height: calc(100vh - 70px); /* Ajustar para navbar más pequeño */
+    }
+
+    /* Reducir aún más el navbar para pantallas muy pequeñas */
+    .nav-container {
+        padding: 6px var(--spacing-sm);
+        height: 70px; /* Reducir altura del navbar */
+    }
+
+    .nav-logo {
+        width: 80px; /* Logo aún más pequeño */
+        height: 45px;
+    }
+
+    .logo-img {
+        width: 80px;
+        height: 45px;
+    }
+
+    .nav-toggle {
+        display: flex !important; /* Asegurar que sea visible */
+        padding: 4px;
+        margin-left: 3px;
+    }
+
+    .bar {
+        width: 18px;
+        height: 2px;
+        margin: 2px 0;
+    }
+
+    /* Ajustar el menú para pantallas muy pequeñas */
+    .nav-menu {
+        top: 70px; /* Ajustar para nueva altura del navbar */
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+
+    /* Reducir tamaños de fuente para pantallas extremadamente pequeñas */
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-title-sub {
+        font-size: 1.3rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    /* Ajustar contenedores */
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+
+    /* Ajustar botones flotantes para pantallas muy pequeñas */
+    .floating-whatsapp {
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        bottom: 85px;
+    }
+
+    .back-to-top {
+        right: 15px;
+        width: 35px;
+        height: 35px;
     }
 }
 
@@ -1793,82 +2228,15 @@ img {
     .scroll-indicator {
         display: none;
     }
-    
+
     body {
         font-size: 12pt;
         line-height: 1.4;
     }
-    
+
     .container {
         max-width: 100%;
         padding: 0;
     }
 }
 
-/* ===== EXTREME MOBILE FIXES (less than 350px) ===== */
-@media (max-width: 350px) {
-    /* Reducir aún más el navbar para pantallas muy pequeñas */
-    .nav-container {
-        padding: 6px var(--spacing-sm);
-        height: 70px; /* Reducir altura del navbar */
-    }
-    
-    .nav-logo {
-        width: 80px; /* Logo aún más pequeño */
-        height: 45px;
-    }
-    
-    .logo-img {
-        width: 80px;
-        height: 45px;
-    }
-    
-    .nav-toggle {
-        padding: 4px;
-        margin-left: 3px;
-    }
-    
-    .bar {
-        width: 18px;
-        height: 2px;
-        margin: 2px 0;
-    }
-    
-    /* Ajustar el menú para pantallas muy pequeñas */
-    .nav-menu {
-        top: 70px; /* Ajustar para nueva altura del navbar */
-        padding: var(--spacing-md) var(--spacing-sm);
-    }
-    
-    /* Reducir tamaños de fuente para pantallas extremadamente pequeñas */
-    .hero-title {
-        font-size: 1.8rem;
-    }
-    
-    .hero-title-sub {
-        font-size: 1.3rem;
-    }
-    
-    .section-title {
-        font-size: 1.6rem;
-    }
-    
-    /* Ajustar contenedores */
-    .container {
-        padding: 0 var(--spacing-sm);
-    }
-    
-    /* Ajustar botones flotantes para pantallas muy pequeñas */
-    .floating-whatsapp {
-        right: 15px;
-        width: 45px;
-        height: 45px;
-        bottom: 85px;
-    }
-    
-    .back-to-top {
-        right: 15px;
-        width: 35px;
-        height: 35px;
-    }
-}

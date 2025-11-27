@@ -194,6 +194,34 @@ function initializeFormHandling() {
             const submitButton = contactForm.querySelector('.cta-button-primary');
             const originalButtonText = submitButton.innerHTML;
             
+            // Validate selects before submission
+            const serviceSelect = document.getElementById('service');
+            const timeSelect = document.getElementById('time');
+            
+            let isValid = true;
+            
+            if (serviceSelect) {
+                if (!validateSelect(serviceSelect)) {
+                    isValid = false;
+                }
+            }
+            
+            if (timeSelect) {
+                if (!validateSelect(timeSelect)) {
+                    isValid = false;
+                }
+            }
+            
+            // If validation fails, don't submit
+            if (!isValid) {
+                // Scroll to first error
+                const firstError = document.querySelector('.custom-select.error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+            
             // Show loading state
             submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
             submitButton.disabled = true;
@@ -437,6 +465,177 @@ document.dispatchEvent(new CustomEvent('websiteLoaded', {
         userAgent: navigator.userAgent
     }
 }));
+
+// ===== CUSTOM SELECT ENHANCEMENT =====
+function initializeCustomSelects() {
+    const customSelects = document.querySelectorAll('.custom-select select');
+    
+    customSelects.forEach(select => {
+        // Skip if already initialized
+        if (select.dataset.initialized === 'true') return;
+        
+        // Get the custom dropdown elements
+        const customDropdown = select.parentElement.querySelector('.custom-dropdown');
+        if (!customDropdown) return;
+        
+        const selectedElement = customDropdown.querySelector('.dropdown-selected');
+        const optionsContainer = customDropdown.querySelector('.dropdown-options');
+        const dropdownOptions = customDropdown.querySelectorAll('.dropdown-option');
+        const dropdownText = customDropdown.querySelector('.dropdown-text');
+        
+        // Toggle dropdown
+        selectedElement.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isOpen = optionsContainer.classList.contains('show');
+            
+            // Close all other dropdowns
+            document.querySelectorAll('.dropdown-options.show').forEach(container => {
+                container.classList.remove('show');
+                container.parentElement.classList.remove('active');
+                // Also remove active class from custom-select parent
+                const customSelect = container.closest('.custom-select');
+                if (customSelect) {
+                    customSelect.classList.remove('focused', 'active');
+                }
+            });
+            
+            if (!isOpen) {
+                optionsContainer.classList.add('show');
+                selectedElement.classList.add('active');
+                // Add active class to custom-select parent for arrow rotation
+                const customSelect = selectedElement.closest('.custom-select');
+                if (customSelect) {
+                    customSelect.classList.add('active');
+                }
+            } else {
+                optionsContainer.classList.remove('show');
+                selectedElement.classList.remove('active');
+                // Remove active class from custom-select parent
+                const customSelect = selectedElement.closest('.custom-select');
+                if (customSelect) {
+                    customSelect.classList.remove('active');
+                }
+            }
+        });
+        
+        // Handle option selection
+        dropdownOptions.forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                const value = this.dataset.value;
+                const text = this.textContent;
+                
+                // Update hidden select
+                select.value = value;
+                
+                // Update visible dropdown
+                dropdownText.textContent = text;
+                
+                // Update selected state
+                dropdownOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                // Close dropdown
+                optionsContainer.classList.remove('show');
+                selectedElement.classList.remove('active');
+                // Remove active class from custom-select parent
+                const customSelect = selectedElement.closest('.custom-select');
+                if (customSelect) {
+                    customSelect.classList.remove('active');
+                }
+                
+                // Trigger change event for validation
+                select.dispatchEvent(new Event('change'));
+                
+                // Add animation class
+                selectedElement.classList.add('selected');
+                setTimeout(() => {
+                    selectedElement.classList.remove('selected');
+                }, 300);
+            });
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            optionsContainer.classList.remove('show');
+            selectedElement.classList.remove('active');
+            // Remove active class from custom-select parent
+            const customSelect = selectedElement.closest('.custom-select');
+            if (customSelect) {
+                customSelect.classList.remove('active');
+            }
+        });
+        
+        // Prevent dropdown from closing when clicking inside
+        optionsContainer.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        // Keyboard navigation
+        selectedElement.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                selectedElement.click();
+            }
+        });
+        
+        // Mark as initialized
+        select.dataset.initialized = 'true';
+    });
+}
+
+// Initialize custom selects when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeCustomSelects);
+
+// ===== SELECT VALIDATION FUNCTIONS =====
+function validateSelect(selectElement) {
+    const selectWrapper = selectElement.closest('.custom-select');
+    const isValid = selectElement.value !== '';
+    
+    // Remove previous validation classes
+    selectElement.classList.remove('error', 'success');
+    
+    if (isValid) {
+        selectElement.classList.add('success');
+        selectWrapper.classList.remove('error');
+    } else {
+        selectElement.classList.add('error');
+        selectWrapper.classList.add('error');
+    }
+    
+    return isValid;
+}
+
+function initializeSelectValidation() {
+    const serviceSelect = document.getElementById('service');
+    const timeSelect = document.getElementById('time');
+    
+    // Add validation on change
+    if (serviceSelect) {
+        serviceSelect.addEventListener('change', function() {
+            validateSelect(this);
+        });
+        
+        // Add validation on blur
+        serviceSelect.addEventListener('blur', function() {
+            validateSelect(this);
+        });
+    }
+    
+    if (timeSelect) {
+        timeSelect.addEventListener('change', function() {
+            validateSelect(this);
+        });
+        
+        timeSelect.addEventListener('blur', function() {
+            validateSelect(this);
+        });
+    }
+}
+
+// Initialize select validation
+document.addEventListener('DOMContentLoaded', initializeSelectValidation);
 
 // ===== EXPORT FUNCTIONS (for testing) =====
 if (typeof module !== 'undefined' && module.exports) {
