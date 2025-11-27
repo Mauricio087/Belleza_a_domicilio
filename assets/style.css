@@ -1521,6 +1521,32 @@ img {
         grid-template-columns: 1fr;
     }
     
+    /* Centrar todo el contenido de las cards en móvil */
+    .service-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .service-content h3,
+    .service-content p,
+    .service-price,
+    .service-duration {
+        text-align: center;
+    }
+    
+    .service-duration {
+        justify-content: center;
+    }
+    
+    /* Centrar el badge/overlay en móvil */
+    .service-overlay {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
     /* Ajustes de hover para móviles */
     .service-card:hover .service-image img {
         transform: scale(1.03);
