@@ -242,6 +242,10 @@ img {
     width: 200px; /* Aumentar ancho proporcionalmente */
     height: 112px; /* 100% del alto del navbar (80px + 32px de padding) */
     margin: 0 var(--spacing-sm);
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    transition: all 0.3s ease;
 }
 
 .logo-img {
@@ -251,9 +255,65 @@ img {
     transition: transform 0.3s ease;
 }
 
-.logo-img:hover {
+.nav-logo:hover {
+    box-shadow: 
+        0 0 30px rgba(212, 175, 55, 0.6),
+        0 0 60px rgba(212, 175, 55, 0.3),
+        0 0 90px rgba(212, 175, 55, 0.1);
+}
+
+.nav-logo:hover .logo-img {
     transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.nav-logo::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.3) 50%, transparent 60%);
+    transform: rotate(45deg);
+    transition: all 0.8s ease;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.nav-logo:hover::before {
+    left: 50%;
+    top: 50%;
+    opacity: 1;
+}
+
+.nav-logo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.4) 0%, rgba(244, 208, 63, 0.3) 50%, rgba(184, 134, 11, 0.4) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.nav-logo:hover::after {
+    opacity: 1;
+    animation: pulse-logo 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-logo {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 .logo-text {
@@ -647,9 +707,62 @@ img {
     backdrop-filter: blur(10px);
 }
 
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.service-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(244, 208, 63, 0.2) 50%, rgba(184, 134, 11, 0.3) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    pointer-events: none;
+}
+
 .service-card:hover {
     transform: translateY(-10px);
-    box-shadow: var(--shadow-heavy);
+    box-shadow: 
+        0 20px 40px rgba(212, 175, 55, 0.4),
+        0 0 60px rgba(212, 175, 55, 0.2),
+        0 0 100px rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.8);
+}
+
+.service-card:hover::before {
+    left: 100%;
+    top: 100%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+}
+
+.service-card:hover::after {
+    opacity: 1;
+    animation: pulse-gold 2s ease-in-out infinite;
+}
+
+@keyframes pulse-gold {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
 }
 
 .service-image {
@@ -1846,6 +1959,10 @@ img {
     width: 180px;
     height: 90px;
     margin: 0 auto var(--spacing-lg) auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    transition: all 0.3s ease;
 }
 
 .footer-logo img {
@@ -1855,8 +1972,65 @@ img {
     transition: transform 0.3s ease;
 }
 
-.footer-logo img:hover {
+.footer-logo:hover {
+    box-shadow: 
+        0 0 30px rgba(212, 175, 55, 0.6),
+        0 0 60px rgba(212, 175, 55, 0.3),
+        0 0 90px rgba(212, 175, 55, 0.1);
+}
+
+.footer-logo:hover img {
     transform: scale(1.1);
+}
+
+.footer-logo::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.3) 50%, transparent 60%);
+    transform: rotate(45deg);
+    transition: all 0.8s ease;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.footer-logo:hover::before {
+    left: 50%;
+    top: 50%;
+    opacity: 1;
+}
+
+.footer-logo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.4) 0%, rgba(244, 208, 63, 0.3) 50%, rgba(184, 134, 11, 0.4) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.footer-logo:hover::after {
+    opacity: 1;
+    animation: pulse-footer-logo 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-footer-logo {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 .footer-logo span {
