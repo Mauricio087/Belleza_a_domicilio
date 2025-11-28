@@ -239,7 +239,7 @@ img {
 .nav-logo {
     display: flex;
     align-items: center;
-    width: 200px; /* Aumentar ancho proporcionalmente */
+    width: 240px; /* Logo alargado para mejor visualización */
     height: 112px; /* 100% del alto del navbar (80px + 32px de padding) */
     margin: 0 var(--spacing-sm);
     position: relative;
@@ -249,7 +249,7 @@ img {
 }
 
 .logo-img {
-    width: 200px;
+    width: 240px;
     height: 112px;
     object-fit: contain;
     transition: transform 0.3s ease;
@@ -502,9 +502,21 @@ img {
     font-weight: 500;
 }
 
+/* ===== ICONOS DEL HERO - COLOR NEGRO EN TODAS LAS VISTAS ===== */
 .feature-item i {
-    color: var(--primary-gold);
+    color: var(--primary-black); /* Cambiado a negro para todas las vistas */
     font-size: 1.1rem;
+}
+
+/* Iconos en botones del hero - cambiar a negro */
+.hero-cta .cta-button-primary i,
+.hero-cta .cta-button-secondary i {
+    color: var(--primary-black);
+}
+
+/* Icono de WhatsApp en navbar - cambiar a negro */
+.cta-button-nav i {
+    color: var(--primary-black);
 }
 
 .hero-cta {
@@ -1056,7 +1068,7 @@ img {
 .about-cta {
     display: flex;
     gap: var(--spacing-md);
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* Cambiado de wrap a nowrap para mantenerlos en la misma línea */
     margin-top: var(--spacing-lg);
     padding-top: var(--spacing-md);
     border-top: 2px solid rgba(212, 175, 55, 0.3);
@@ -1069,6 +1081,11 @@ img {
     border: 2px solid rgba(212, 175, 55, 0.8);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
+    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+    flex-shrink: 0; /* Evitar que el botón se encoja demasiado */
+    min-width: 180px; /* Ancho mínimo para que ambos botones tengan tamaño similar */
+    text-align: center;
+    justify-content: center;
 }
 
 .about .cta-button-primary:hover {
@@ -1084,6 +1101,11 @@ img {
     color: var(--primary-black);
     border: 2px solid rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
+    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+    flex-shrink: 0; /* Evitar que el botón se encoja demasiado */
+    min-width: 180px; /* Ancho mínimo para que ambos botones tengan tamaño similar */
+    text-align: center;
+    justify-content: center;
 }
 
 .about .cta-button-secondary:hover {
@@ -1786,6 +1808,29 @@ img {
     .custom-select:active select {
         border-radius: 10px;
     }
+
+    /* Ajustes para estadísticas en tablets */
+    .about-stats {
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas en tablets */
+        gap: var(--spacing-sm);
+        margin-top: var(--spacing-md);
+    }
+
+    .stat-item {
+        padding: var(--spacing-md);
+        max-width: 200px; /* Limitar ancho en tablets */
+        margin: 0 auto;
+    }
+
+    .stat-number {
+        font-size: 2.2rem; /* Tamaño intermedio */
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
 }
 
 /* Estilos para pantallas pequeñas */
@@ -2071,6 +2116,7 @@ img {
     display: flex;
     gap: var(--spacing-sm);
     margin-top: var(--spacing-md);
+    justify-content: center; /* Centrar los iconos de redes sociales */
 }
 
 .social-link {
@@ -2191,22 +2237,89 @@ img {
     .about-content {
         grid-template-columns: 1fr;
         gap: var(--spacing-xl);
+        display: flex;
+        flex-direction: column;
+        position: relative; /* Para manejar el posicionamiento de elementos hijos */
     }
 
     /* Ajustes para móvil - header centrado */
     .about .section-header {
         margin-bottom: var(--spacing-xl);
         padding: 0 var(--spacing-md);
+        order: 1;
     }
 
+    /* Reorganizar elementos en móvil: título -> imagen -> texto -> estadísticas -> botones */
     .about-image {
-        margin-top: 0; /* Eliminar margen en móvil ya que la imagen va arriba */
+        margin-top: 0;
         text-align: center;
+        order: 2; /* Imagen después del título */
+        position: relative; /* Para posicionar las estadísticas */
     }
 
     .about-text {
-        padding-right: 0; /* Eliminar padding en móvil */
-        text-align: left; /* Mantener texto alineado a la izquierda en móvil */
+        padding-right: 0;
+        text-align: left;
+        order: 3; /* Texto después de la imagen */
+    }
+
+    .about-stats {
+        order: 4; /* Estadísticas después del texto */
+        margin-top: var(--spacing-lg);
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .about-cta {
+        order: 5; /* Botones al final */
+        width: 100%; /* Asegurar que no cause desborde */
+        box-sizing: border-box;
+    }
+
+    /* Mover las estadísticas desde dentro de about-image a su propio flujo */
+    .about-image .about-stats {
+        position: static; /* Quitar posicionamiento absoluto */
+        margin-top: var(--spacing-lg);
+        margin-bottom: 0;
+    }
+
+    /* Asegurar que el orden funcione correctamente */
+    .about-text + .about-image + .about-stats {
+        order: 4; /* Estadísticas después del texto e imagen */
+    }
+
+    /* Prevenir desborde en la sección about */
+    .about {
+        overflow-x: hidden;
+        word-wrap: break-word;
+    }
+
+    .about-text {
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        box-sizing: border-box;
+        padding: var(--spacing-lg) var(--spacing-md); /* Ajustar padding para móvil */
+    }
+
+    .about-description {
+        max-width: 100%;
+        overflow-wrap: break-word;
+    }
+
+    .about-features {
+        grid-template-columns: 1fr; /* Una columna en móvil */
+        gap: var(--spacing-sm);
+    }
+
+    .about-feature {
+        font-size: 0.9rem; /* Reducir tamaño de fuente en móvil */
+        padding: var(--spacing-sm);
+    }
+
+    .about-img {
+        max-width: 100%;
+        height: auto; /* Mantener proporción */
     }
 
     .contact-grid {
@@ -2403,12 +2516,12 @@ img {
 
     /* Ajustes adicionales para pantallas muy pequeñas */
     .nav-logo {
-        width: 100px; /* Reducir aún más el logo */
+        width: 140px; /* Logo alargado para mejor visualización en móvil */
         height: 56px; /* Mantener proporción 16:9 */
     }
 
     .logo-img {
-        width: 100px;
+        width: 140px;
         height: 56px;
     }
 
@@ -2436,6 +2549,35 @@ img {
         font-size: 1rem;
     }
 
+    /* Corrección de desborde en estadísticas de about */
+    .about-stats {
+        grid-template-columns: 1fr; /* Una columna en móvil */
+        gap: var(--spacing-sm); /* Reducir espacio entre elementos */
+        margin-top: var(--spacing-md); /* Reducir margen superior */
+        width: 100%; /* Asegurar que no se desborde */
+        box-sizing: border-box;
+    }
+
+    .stat-item {
+        padding: var(--spacing-md); /* Reducir padding */
+        width: 100%; /* Ocupar todo el ancho disponible */
+        box-sizing: border-box;
+        margin: 0 auto; /* Centrar si hay espacio extra */
+        max-width: 280px; /* Limitar ancho máximo */
+    }
+
+    .stat-number {
+        font-size: 2rem; /* Reducir tamaño del número */
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .stat-label {
+        font-size: 0.8rem; /* Reducir tamaño del texto */
+        letter-spacing: 0.3px; /* Ajustar espaciado */
+        word-wrap: break-word; /* Permitir salto de línea */
+        overflow-wrap: break-word;
+    }
+
     .section-title {
         font-size: 2rem;
     }
@@ -2457,7 +2599,18 @@ img {
 
     .about-cta {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch; /* Cambiar a stretch para que ocupen todo el ancho */
+        gap: var(--spacing-sm); /* Reducir espacio entre botones */
+    }
+
+    .about .cta-button-primary,
+    .about .cta-button-secondary {
+        width: 100%; /* Botones de ancho completo en móvil */
+        text-align: center;
+        justify-content: center; /* Centrar contenido de los botones */
+        font-size: 0.9rem; /* Reducir tamaño de fuente */
+        padding: var(--spacing-sm) var(--spacing-md); /* Ajustar padding */
+        box-sizing: border-box;
     }
 
     .contact-form-container {
@@ -2470,6 +2623,23 @@ img {
         height: 67px; /* Mantener proporción con el logo */
         margin: 0; /* Eliminar márgenes laterales */
         flex-shrink: 0; /* Evitar que se encoja */
+        border-radius: 8px; /* Reducir border radius en móvil */
+    }
+
+    /* Mantener efectos de brillo en móvil con proporciones reducidas */
+    .nav-logo::before {
+        background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.2) 50%, transparent 60%);
+    }
+
+    .nav-logo::after {
+        border-radius: 8px; /* Match con el border radius del contenedor */
+    }
+
+    .nav-logo:hover {
+        box-shadow: 
+            0 0 20px rgba(212, 175, 55, 0.4),
+            0 0 40px rgba(212, 175, 55, 0.2),
+            0 0 60px rgba(212, 175, 55, 0.1);
     }
 
     .logo-img {
