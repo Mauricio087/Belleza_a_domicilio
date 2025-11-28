@@ -508,10 +508,27 @@ img {
     font-size: 1.1rem;
 }
 
-/* Iconos en botones del hero - cambiar a negro */
-.hero-cta .cta-button-primary i,
+/* Iconos en botones del hero - mejores contrastes */
+.hero-cta .cta-button-primary i {
+    color: var(--primary-gold); /* Dorado para contrastar con fondo negro */
+    transition: var(--transition-fast);
+}
+
 .hero-cta .cta-button-secondary i {
-    color: var(--primary-black);
+    color: var(--primary-gold); /* Dorado fijo para WhatsApp */
+    transition: var(--transition-fast);
+}
+
+/* Efectos hover para los iconos */
+.hero-cta .cta-button-primary:hover i {
+    color: #F4D03F; /* Dorado más claro en hover */
+    transform: scale(1.1); /* Ligeramente más grande */
+}
+
+/* WhatsApp mantiene el icono dorado fijo sin cambios en hover */
+.hero-cta .cta-button-secondary:hover i {
+    color: var(--primary-gold); /* Mantiene dorado fijo */
+    transform: scale(1.1); /* Solo escala, sin cambio de color */
 }
 
 /* Icono de WhatsApp en navbar - cambiar a negro */
