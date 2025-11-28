@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeScrollEffects();
     initializeFormHandling();
     initializeBackToTop();
+    initializeNavbarScroll(); // Agregar esta línea
     initializeMobileMenu();
     initializeLazyLoading();
     initializeInstagramFeed();
@@ -287,6 +288,90 @@ function initializeBackToTop() {
             });
         });
     }
+}
+
+// ===== NAVBAR HIDE/SHOW ON SCROLL - EFECTO PROFESIONAL =====
+function initializeNavbarScroll() {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+    
+    let lastScrollTop = 0;
+    let isScrollingDown = false;
+    let scrollTimeout;
+    let hideTimeout;
+    const scrollThreshold = 80; // Pixels de scroll antes de activar el comportamiento
+    const heroSection = document.querySelector('.hero');
+    
+    function updateNavbarVisibility() {
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Siempre mostrar navbar cuando estamos en la parte superior
+        if (currentScrollTop < scrollThreshold) {
+            clearTimeout(hideTimeout);
+            navbar.classList.remove('hidden');
+            navbar.classList.add('showing');
+            lastScrollTop = currentScrollTop;
+            return;
+        }
+        
+        // Si estamos en la sección hero, mostrar navbar con prioridad
+        if (heroSection) {
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            if (currentScrollTop < heroBottom - 30) {
+                clearTimeout(hideTimeout);
+                navbar.classList.remove('hidden');
+                navbar.classList.add('showing');
+                lastScrollTop = currentScrollTop;
+                return;
+            }
+        }
+        
+        // Detectar dirección del scroll con precisión
+        if (currentScrollTop > lastScrollTop + 8) {
+            isScrollingDown = true;
+        } else if (currentScrollTop < lastScrollTop - 8) {
+            isScrollingDown = false;
+        }
+        
+        // Efecto profesional: delay inteligente al ocultar
+        if (isScrollingDown && currentScrollTop > scrollThreshold * 2) {
+            clearTimeout(hideTimeout);
+            hideTimeout = setTimeout(() => {
+                navbar.classList.add('hidden');
+                navbar.classList.remove('showing');
+            }, 150); // Pequeño delay para mayor fluidez
+        } else if (!isScrollingDown) {
+            // Mostrar inmediatamente al subir
+            clearTimeout(hideTimeout);
+            navbar.classList.remove('hidden');
+            navbar.classList.add('showing');
+        }
+        
+        lastScrollTop = currentScrollTop;
+    }
+    
+    // Optimizar con requestAnimationFrame para mejor rendimiento
+    let ticking = false;
+    function requestTick() {
+        if (!ticking) {
+            window.requestAnimationFrame(updateNavbarVisibility);
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', () => {
+        ticking = false;
+        requestTick();
+        
+        // Clear timeout para asegurar estado final
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            updateNavbarVisibility();
+        }, 100);
+    });
+    
+    // Estado inicial
+    updateNavbarVisibility();
 }
 
 // ===== LAZY LOADING =====
