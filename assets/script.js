@@ -273,13 +273,64 @@ function initializeBackToTop() {
     const backToTopButton = document.querySelector('.back-to-top');
     
     if (backToTopButton) {
+        // Detectar secciones con fondo dorado
+        const goldSections = [
+            '.hero',                    // Sección hero con gradiente dorado
+            '.services',                // Sección de servicios
+            '.testimonials',            // Sección de testimonios
+            '.contact',                 // Sección de contacto
+            '.floating-whatsapp',       // Botón de WhatsApp flotante
+            '.cta-button-nav',          // Botones de navegación dorados
+            '.service-card',            // Tarjetas de servicio
+            '.testimonial-card'        // Tarjetas de testimonios
+        ];
+        
+        function updateButtonColor() {
+            const scrollPosition = window.pageYOffset;
+            const buttonRect = backToTopButton.getBoundingClientRect();
+            const buttonCenter = buttonRect.top + buttonRect.height / 2;
+            
+            let isOnGoldBackground = false;
+            
+            // Verificar si el botón está sobre alguna sección dorada
+            goldSections.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(element => {
+                    if (element) {
+                        const rect = element.getBoundingClientRect();
+                        const elementTop = rect.top;
+                        const elementBottom = rect.bottom;
+                        
+                        // Si el botón está dentro de los límites del elemento
+                        if (buttonCenter >= elementTop && buttonCenter <= elementBottom) {
+                            isOnGoldBackground = true;
+                        }
+                    }
+                });
+            });
+            
+            // Alternar clase según esté sobre fondo dorado o no
+            if (isOnGoldBackground) {
+                backToTopButton.classList.add('on-gold-background');
+            } else {
+                backToTopButton.classList.remove('on-gold-background');
+            }
+        }
+        
         window.addEventListener('scroll', () => {
+            // Controlar visibilidad del botón
             if (window.pageYOffset > 300) {
                 backToTopButton.classList.add('show');
             } else {
                 backToTopButton.classList.remove('show');
             }
+            
+            // Actualizar color según la posición
+            updateButtonColor();
         });
+        
+        // Actualizar color al cargar la página
+        updateButtonColor();
         
         backToTopButton.addEventListener('click', () => {
             window.scrollTo({

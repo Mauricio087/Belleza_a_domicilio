@@ -2193,11 +2193,11 @@ img {
 /* ===== BACK TO TOP BUTTON ===== */
 .back-to-top {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 40px;
+    right: 40px;
     width: 50px;
     height: 50px;
-    background: var(--gradient-gold);
+    background: var(--primary-gold);
     color: var(--primary-white);
     border: none;
     border-radius: var(--radius-xl);
@@ -2211,6 +2211,17 @@ img {
     opacity: 0;
     visibility: hidden;
     z-index: 999;
+}
+
+/* Estilo especial para cuando el botón está sobre fondos dorados */
+.back-to-top.on-gold-background {
+    background: var(--primary-black);
+    color: var(--primary-white);
+}
+
+.back-to-top.on-gold-background:hover {
+    background: var(--primary-gold-light);
+    color: var(--primary-black);
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
@@ -2661,6 +2672,46 @@ img {
     .hero-content {
         min-height: calc(100vh - 80px); /* Ajustar para nuevo tamaño del navbar */
     }
+
+    /* ===== FOOTER CENTERING FOR MOBILE ===== */
+    .footer-content {
+        grid-template-columns: 1fr; /* Una sola columna */
+        text-align: center; /* Centrar todo el texto */
+        gap: var(--spacing-lg); /* Reducir espacio entre secciones */
+    }
+
+    .footer-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centrar elementos horizontalmente */
+    }
+
+    .footer-section h3 {
+        text-align: center; /* Asegurar que los títulos estén centrados */
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .footer-section p {
+        text-align: center; /* Centrar párrafos */
+        max-width: 300px; /* Limitar ancho para mejor lectura */
+    }
+
+    .footer-links {
+        text-align: center; /* Centrar enlaces */
+    }
+
+    .footer-links li {
+        text-align: center; /* Centrar cada elemento de lista */
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .footer-contact p {
+        justify-content: center; /* Centrar iconos y texto de contacto */
+    }
+
+    .footer-bottom {
+        text-align: center; /* Centrar el copyright */
+    }
 }
 
 /* ===== EXTREME MOBILE FIXES (less than 350px) ===== */
@@ -2805,6 +2856,13 @@ img {
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
     animation: shimmer 2s infinite;
+}
+
+/* ===== MOSTRAR BOTÓN SCROLL UP SOLO EN PC ===== */
+@media (max-width: 1023px) {
+    .back-to-top {
+        display: none !important;
+    }
 }
 
 /* ===== PRINT STYLES ===== */
